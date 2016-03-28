@@ -15,7 +15,6 @@
         <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
         <property name="hibernate.show_sql">true</property>
                 
-        <mapping resource="model/CustomerBean.hbm.xml" />
         <mapping resource="model/ProductBean.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

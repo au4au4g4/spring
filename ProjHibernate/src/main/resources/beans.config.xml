@@ -12,13 +12,43 @@
 		<property name="username" value="sa"></property>
 		<property name="password" value="sa123456"></property>
 	</bean>
-	<bean id="sessionFactory" destroy-method="destroy"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+	<bean id="sessionFactory" destroy-method="destroy" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+		<!-- 法1 使用hibernate.cfg.xml -->
+		<!-- <property name="configLocation" value="classpath:hibernate.cfg.xml"></property> -->
+
+		<!-- 法2 不用hibernate.cfg.xml -->
+		<property name="mappingResources">
+			<list>
+				<value>model/ProductBean.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
 	</bean>
 
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="model"></context:component-scan>
 
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
