@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import model.CustomerDAOI;
 import model.CustomerVO;
 import model.HibernateUtil;
+import model.ProductVO;
 
 public class CustomerDAO implements CustomerDAOI{
 
@@ -17,7 +18,7 @@ public class CustomerDAO implements CustomerDAOI{
 				
 		try {
 			tx=session.beginTransaction();
-			result=session.get(CustomerVO.class, custid);
+			result=(CustomerVO) session.get(CustomerVO.class, custid);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import model.HibernateUtil;
@@ -11,6 +12,12 @@ import model.ProductDAOI;
 import model.ProductVO;
 
 public class ProductDAO implements ProductDAOI {
+	
+	SessionFactory SessionFactory;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		SessionFactory = sessionFactory;
+	}
 
 	@Override
 	public ProductVO select(Integer id) {
@@ -20,7 +27,7 @@ public class ProductDAO implements ProductDAOI {
 
 		try {
 			tx = session.beginTransaction();
-			result = session.get(ProductVO.class, id);
+			result = (ProductVO) session.get(ProductVO.class, id);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
